@@ -60,18 +60,18 @@ if let roomCount = john.residence?.numberOfRooms {
 // Prints "Unable to retrieve the number of rooms."
 ```
 
-This tells Swift to “chain” on the optional residence property and to retrieve the value of numberOfRooms if residence exists.
+This tells Swift to “chain” on the optional **residence** property and to retrieve the value of **numberOfRooms** if **residence** exists.
 
-Because the attempt to access numberOfRooms has the potential to fail, the optional chaining attempt returns a value of type Int?, or “optional Int”. When residence is nil, as in the example above, this optional Int will also be nil, to reflect the fact that it was not possible to access numberOfRooms. The optional Int is accessed through optional binding to unwrap the integer and assign the nonoptional value to the roomCount variable.
+Because the attempt to access **numberOfRooms** has the potential to fail, the optional chaining attempt returns a value of type **Int?**, or “optional **Int**”. When **residence** is *nil*, as in the example above, this optional **Int** will also be *nil*, to reflect the fact that it was not possible to access **numberOfRooms**. The optional **Int** is accessed through optional binding to unwrap the integer and assign the nonoptional value to the **roomCount** variable.
 
-Note that this is true even though numberOfRooms is a nonoptional Int. The fact that it is queried through an optional chain means that the call to numberOfRooms will always return an Int? instead of an Int.
+Note that this is true even though **numberOfRooms** is a nonoptional **Int**. The fact that it is queried through an optional chain means that the call to **numberOfRooms** will always return an **Int?** instead of an **Int**.
 
-You can assign a Residence instance to john.residence, so that it no longer has a nil value:
+You can assign a **Residence** instance to **john.residence**, so that it no longer has a *nil* value:
 ```Swift
 john.residence = Residence()
 ```
 
-john.residence now contains an actual Residence instance, rather than nil. If you try to access numberOfRooms with the same optional chaining as before, it will now return an Int? that contains the default numberOfRooms value of 1:
+**john.residence** now contains an actual **Residence** instance, rather than *nil*. If you try to access **numberOfRooms** with the same optional chaining as before, it will now return an **Int?** that contains the default **numberOfRooms** value of 1:
 
 ```Swift
 if let roomCount = john.residence?.numberOfRooms {
@@ -81,7 +81,71 @@ if let roomCount = john.residence?.numberOfRooms {
 }
 // Prints "John's residence has 1 room(s)."
 ```
+#### **Defining Model Classes for Optional Chaining**
+You can use optional chaining with calls to properties, methods, and subscripts that are more than one level deep. This enables you to drill down into subproperties within complex models of interrelated types, and to check whether it is possible to access properties, methods, and subscripts on those subproperties.
 
+The code snippets below define four model classes for use in several subsequent examples, including examples of multilevel optional chaining. These classes expand upon the **Person** and **Residence** model from above by adding a **Room** and **Address** class, with associated properties, methods, and subscripts.
+
+The **Person** class is defined in the same way as before:
+```Swift
+class Person {
+    var residence: Residence?
+}
+```
+The **Residence** class is more complex than before. This time, the **Residence** class defines a variable property called **rooms**, which is initialized with an empty array of type **Room**:
+```Swift
+class Residence {
+    var rooms = [Room]()
+    var numberOfRooms: Int {
+        return rooms.count
+    }
+    subscript(i: Int) -> Room {
+        get {
+            return rooms[i]
+        }
+        set {
+            rooms[i] = newValue
+        }
+    }
+    func printNumberOfRooms() {
+        print("The number of rooms is \(numberOfRooms)")
+    }
+    var address: Address?
+}
+```
+Because this version of **Residence** stores an array of **Room** instances, its **numberOfRooms** property is implemented as a computed property, not a stored property. The computed **numberOfRooms** property simply returns the value of the **count** property from the **rooms** array.
+
+As a shortcut to accessing its **rooms** array, this version of **Residence** provides a read-write subscript that provides access to the room at the requested index in the **rooms** array.
+
+This version of **Residence** also provides a method called **printNumberOfRooms**, which simply prints the number of rooms in the residence.
+
+Finally, **Residence** defines an optional property called **address**, with a type of **Address?.** The **Address** class type for this property is defined below.
+
+The **Room** class used for the **rooms** array is a simple class with one property called **name**, and an initializer to set that property to a suitable room name:
+```Swift
+class Room {
+    let name: String
+    init(name: String) { self.name = name }
+}
+```
+The final class in this model is called **Address**. This class has three optional properties of type **String?**. The first two properties, **buildingName** and **buildingNumber**, are alternative ways to identify a particular building as part of an address. The third property, **street**, is used to name the street for that address:
+```Swift
+class Address {
+    var buildingName: String?
+    var buildingNumber: String?
+    var street: String?
+    func buildingIdentifier() -> String? {
+        if let buildingNumber = buildingNumber, let street = street {
+            return "\(buildingNumber) \(street)"
+        } else if buildingName != nil {
+            return buildingName
+        } else {
+            return nil
+        }
+    }
+}
+```
+The **Address** class also provides a method called **buildingIdentifier()**, which has a return type of **String?**. This method checks the properties of the address and returns **buildingName** if it has a value, or **buildingNumber** concatenated with **street** if both have values, or *nil* otherwise.
 
 ## **Kotlin:**
 
@@ -121,7 +185,7 @@ val l = b.length // error: variable 'b' can be null
 ```
 ### Checking for **null** in conditions:
 
-#### 1. explicitly check if **b** is *null*, and handle the two options separately:
+#### 1. Explicitly check if **b** is *null*, and handle the two options separately:
 ```kotlin
 val l = if (b != null) b.length else -1
 ```
