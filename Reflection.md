@@ -1,11 +1,11 @@
 # Swift
 Reflection is something that you normally don’t use with statically typed languages like Swift. However, reflection support has been present since Swift 2, offering a read-only access to the properties of an instance, and, although still very limited (you can’t access computed properties and functions with it), it finds application in some cases.
 
-Swift reflection should rather be called introspection, as its current functionality allows us to look at the objects’ properties without modifying them. The concept is represented by Mirror structure. The API’s overview explicitly states it’s focused on a particular instance rather than on type. Let’s explore what’s available.
+Swift reflection should rather be called *introspection*, as its current functionality allows us to look at the objects’ properties without modifying them. The concept is represented by **Mirror structure**. The API’s overview explicitly states it’s focused on a particular instance rather than on type. Let’s explore what’s available.
 
 A mirror describes the parts that make up a particular instance, such as the instance’s stored properties, collection or tuple elements, or its active enumeration case. Mirrors also provide a “display style” property that suggests how this mirror might be rendered.
 
-Playgrounds and the debugger use the Mirror type to display representations of values of any type. For example, when you pass an instance to the dump(_:_:_:_:) function, a mirror is used to render that instance’s runtime contents.
+Playgrounds and the debugger use the **Mirror** type to display representations of values of any type. For example, when you pass an instance to the dump(_:_:_:_:) function, a mirror is used to render that instance’s runtime contents.
 ```swift
 struct Point {
     let x: Int, y: Int
@@ -54,7 +54,7 @@ To access properties as first-class objects in Kotlin, we can also use the :: op
 
 ```kotlin
 val x = 1
-​
+
 fun main(args: Array<String>) {
     println(::x.get())
     println(::x.name) 
