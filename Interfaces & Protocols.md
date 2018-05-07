@@ -4,9 +4,16 @@
 ### Kotlin: Interfaces
 ## What abilities does it have?
 ### Swift
-
-
+* A protocol can have type methods or instance methods.
+* Methods are declared in exactly the same way as for normal instance and type methods, but without curly braces or a method body.
+* Variadic parameters are allowed.
+* Default values are not allowed.
+* A protocol can inherit one or more other protocols.
+* Protocols support mutating methods: methods that are allowed to modify the instance it belongs to and any properties of that instance
+* Protocols can have specific initializers like normal methods which the confirming types can implement.
+* You can limit protocol adoption to class types (and not structures or enumerations) by adding the *AnyObject* or *class* protocol to a protocol’s inheritance list.
 ### Kotlin
+* Two or more interfaces can be implemented in the same class.
 
 ## How is it used?
 ### Swift
