@@ -1,7 +1,7 @@
 # Interfaces & Protocols
 ## What does the language support?
-### Swift: Protocols
-### Kotlin: Interfaces
+##### Swift: Protocols
+##### Kotlin: Interfaces
 ## What abilities does it have?
 ### Swift
 * A protocol can have type methods or instance methods.
