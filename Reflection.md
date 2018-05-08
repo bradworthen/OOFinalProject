@@ -1,4 +1,6 @@
-# Swift
+# Reflection
+
+## Swift
 Reflection is something that you normally don’t use with statically typed languages like Swift. However, reflection support has been present since Swift 2, offering a read-only access to the properties of an instance, and, although still very limited (you can’t access computed properties and functions with it), it finds application in some cases.
 
 Swift reflection should rather be called *introspection*, as its current functionality allows us to look at the objects’ properties without modifying them. The concept is represented by **Mirror structure**. The API’s overview explicitly states it’s focused on a particular instance rather than on type. Let’s explore what’s available.
@@ -18,7 +20,7 @@ print(String(reflecting: p))
 //           - y: 30"
 ```
 
-# Kotlin
+## Kotlin
 Kotlin makes functions and properties first-class citizens in the language, and introspecting them (i.e. learning a name or a type of a property or function at runtime) is closely intertwined with simply using a functional or reactive style.
 
 ### Class References
