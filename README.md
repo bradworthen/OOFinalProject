@@ -1,2 +1,2 @@
-# OOFinalProject
-This is my final Project for CS4330 comparing 2 Object Oriented Languages
+# A Look at Modern Languages
+This analysis looks at the differences between Swift and Kotlin
